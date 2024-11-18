@@ -26,11 +26,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware to parse JSON bodies
+//Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/newtimepass").then(() => {
+mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Connected to MongoDB');
   })
   .catch(err => {

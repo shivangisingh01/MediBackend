@@ -1,13 +1,15 @@
 const express = require('express');
-const { registerUser ,  loginUser} = require('../controllers/authController');
-const authenticateToken = require('../middleware/authenticateToken'); // Adjust the path if necessary
-const authorizeRole = require('../middleware/roleCheck');
+const { registerUser , loginUser} = require('../controllers/authController');
+const authMiddleware = require('../middleware/authMiddleware'); // Adjust the path if necessary
+// const authorizeRole = require('../middleware/roleCheck');
+const { getUserData } = require('../controllers/fetchController'); 
 const router = express.Router();
 
 // router.get('/logout', logoutUser);
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+router.get('/fetch', authMiddleware, getUserData);
 // router.get('/fetch-login-data',getLoggedInUser );
 
 
