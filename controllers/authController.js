@@ -6,7 +6,6 @@ const axios = require('axios');
 
 // exports.logoutUser = (req, res) => {
 //   try {
-
 //     // If you're using JWT authentication, you can clear the token cookie
 //     res.clearCookie('token', {
 //       httpOnly: true,  // For security reasons, make the cookie HTTP-only
@@ -84,7 +83,7 @@ exports.registerUser = async (req, res) => {
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     // Respond with the token
-    res.status(201).json({message: 'Registration successful!', token });
+    res.status(201).json({ message: 'Registration successful', token });
   } catch (error) {
     console.error('Registration error:', error); // Log the error
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -105,7 +104,7 @@ exports.loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-
+    
     const payload = { userId: user._id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
